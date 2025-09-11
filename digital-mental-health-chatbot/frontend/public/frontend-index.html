@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#6366f1" />
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Digital Mental Health Platform - AI-powered mental health support for students in higher education institutions. Get 24/7 chatbot assistance, mood tracking, and access to professional counselors." />
+    <meta name="keywords" content="mental health, student support, AI chatbot, counseling, mood tracking, crisis detection" />
+    <meta name="author" content="SIH 2025 Team" />
+    
+    <!-- Open Graph Meta Tags for Social Sharing -->
+    <meta property="og:title" content="Digital Mental Health Platform" />
+    <meta property="og:description" content="Comprehensive mental health support system for students with AI chatbot, crisis detection, and professional counseling services." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="%PUBLIC_URL%" />
+    <meta property="og:image" content="%PUBLIC_URL%/og-image.png" />
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Digital Mental Health Platform" />
+    <meta name="twitter:description" content="AI-powered mental health support for students" />
+    <meta name="twitter:image" content="%PUBLIC_URL%/twitter-image.png" />
+    
+    <!-- Apple Touch Icons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="%PUBLIC_URL%/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="%PUBLIC_URL%/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="%PUBLIC_URL%/favicon-16x16.png" />
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    
+    <!-- Preconnect to external resources for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    
+    <!-- Google Fonts -->
+    <link 
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" 
+      rel="stylesheet" 
+    />
+    
+    <!-- Material-UI Icons -->
+    <link 
+      rel="stylesheet" 
+      href="https://fonts.googleapis.com/icon?family=Material+Icons" 
+    />
+    
+    <!-- Crisis Hotline Information (for emergency situations) -->
+    <meta name="crisis-hotline" content="9152987821" />
+    <meta name="emergency-services" content="108" />
+    
+    <!-- Security Headers -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta http-equiv="X-Frame-Options" content="DENY" />
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block" />
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
+    
+    <!-- Prevent caching of sensitive pages -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    
+    <title>Digital Mental Health Platform | SIH 2025</title>
+    
+    <!-- Inline critical CSS for faster loading -->
+    <style>
+      /* Critical CSS for loading state */
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        background-color: #f8fafc;
+        color: #1f2937;
+      }
+      
+      /* Loading spinner styles */
+      .loading-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #f8fafc;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+      }
+      
+      .loading-spinner {
+        width: 50px;
+        height: 50px;
+        border: 4px solid #e5e7eb;
+        border-top: 4px solid #6366f1;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+      
+      .loading-text {
+        margin-top: 20px;
+        color: #6b7280;
+        font-size: 16px;
+        text-align: center;
+      }
+      
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+      
+      /* Hide loading once React loads */
+      .app-loaded .loading-container {
+        display: none;
+      }
+      
+      /* Emergency crisis banner styles */
+      .crisis-banner {
+        background-color: #dc2626;
+        color: white;
+        text-align: center;
+        padding: 8px;
+        font-size: 14px;
+        position: sticky;
+        top: 0;
+        z-index: 10000;
+        display: none;
+      }
+      
+      .crisis-banner.show {
+        display: block;
+      }
+      
+      .crisis-banner a {
+        color: white;
+        text-decoration: underline;
+        font-weight: 600;
+      }
+      
+      /* Accessibility improvements */
+      @media (prefers-reduced-motion: reduce) {
+        .loading-spinner {
+          animation: none;
+        }
+      }
+      
+      /* Dark mode support */
+      @media (prefers-color-scheme: dark) {
+        body {
+          background-color: #111827;
+          color: #f9fafb;
+        }
+        
+        .loading-container {
+          background: #111827;
+        }
+      }
+    </style>
+  </head>
+  
+  <body>
+    <!-- Crisis Support Banner (hidden by default, shown via JavaScript if needed) -->
+    <div id="crisis-banner" class="crisis-banner">
+      🚨 If you're in crisis, call <a href="tel:9152987821">9152987821</a> or emergency services <a href="tel:108">108</a> immediately
+    </div>
+    
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="loading-container">
+      <div>
+        <div class="loading-spinner"></div>
+        <div class="loading-text">
+          Loading Mental Health Platform...
+          <br>
+          <small style="color: #9ca3af; font-size: 12px;">Preparing your safe space</small>
+        </div>
+      </div>
+    </div>
+    
+    <!-- React App Root -->
+    <noscript>
+      <div style="text-align: center; padding: 50px; color: #dc2626;">
+        <h2>JavaScript Required</h2>
+        <p>This application requires JavaScript to run. Please enable JavaScript in your browser to access the Digital Mental Health Platform.</p>
+        <p>If you need immediate help, please contact:</p>
+        <ul style="list-style: none; padding: 0;">
+          <li><strong>Crisis Helpline:</strong> <a href="tel:9152987821">9152987821</a></li>
+          <li><strong>Emergency Services:</strong> <a href="tel:108">108</a></li>
+        </ul>
+      </div>
+    </noscript>
+    
+    <!-- Main React Application Container -->
+    <div id="root"></div>
+    
+    <!-- Service Worker Registration -->
+    <script>
+      // Register service worker for offline functionality
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker.register('/sw.js')
+            .then(function(registration) {
+              console.log('SW registered: ', registration);
+            })
+            .catch(function(registrationError) {
+              console.log('SW registration failed: ', registrationError);
+            });
+        });
+      }
+      
+      // Hide loading screen once React loads
+      window.addEventListener('load', function() {
+        setTimeout(function() {
+          const loadingScreen = document.getElementById('loading-screen');
+          if (loadingScreen) {
+            loadingScreen.style.display = 'none';
+          }
+          document.body.classList.add('app-loaded');
+        }, 1000);
+      });
+      
+      // Crisis detection function (can be called from React app)
+      window.showCrisisBanner = function() {
+        const banner = document.getElementById('crisis-banner');
+        if (banner) {
+          banner.classList.add('show');
+        }
+      };
+      
+      window.hideCrisisBanner = function() {
+        const banner = document.getElementById('crisis-banner');
+        if (banner) {
+          banner.classList.remove('show');
+        }
+      };
+      
+      // Analytics (placeholder for future implementation)
+      window.trackEvent = function(eventName, properties) {
+        // Implement analytics tracking here
+        console.log('Event tracked:', eventName, properties);
+      };
+      
+      // Error boundary for unhandled errors
+      window.addEventListener('error', function(e) {
+        console.error('Unhandled error:', e.error);
+        // Could send error to monitoring service
+      });
+      
+      // Performance monitoring
+      window.addEventListener('load', function() {
+        setTimeout(function() {
+          const perfData = performance.getEntriesByType('navigation')[0];
+          if (perfData) {
+            console.log('Page load time:', perfData.loadEventEnd - perfData.loadEventStart, 'ms');
+          }
+        }, 0);
+      });
+    </script>
+    
+    <!-- Accessibility: Screen reader announcements -->
+    <div aria-live="polite" aria-atomic="true" id="sr-announcements" style="position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden;"></div>
+  </body>
+</html>
