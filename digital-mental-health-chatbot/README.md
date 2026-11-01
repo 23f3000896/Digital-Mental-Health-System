@@ -1,6 +1,5 @@
 # Digital Mental Health and Psychological Support System
 
-## SIH 2025 - Problem ID 25092
 
 A comprehensive digital platform designed to provide mental health and psychological support for students in higher education institutions.
 
